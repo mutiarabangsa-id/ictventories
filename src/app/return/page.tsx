@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -101,7 +102,7 @@ export default function ReturnPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-blue-50 flex items-center justify-center p-4">
+      <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-blue-50 flex items-center justify-center p-4">
         <Card className="w-full max-w-md text-center">
           <CardHeader>
             <div className="text-5xl mb-4">🎉</div>
@@ -111,7 +112,7 @@ export default function ReturnPage() {
             </CardDescription>
           </CardHeader>
         </Card>
-      </div>
+      </motion.div>
     );
   }
 
@@ -123,8 +124,10 @@ export default function ReturnPage() {
           <p className="text-gray-500 mt-1">Masukkan kode unik Anda</p>
         </div>
 
+        <AnimatePresence mode="wait">
         {/* Step 1: Input Code */}
         {step === 1 && (
+          <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
           <Card>
             <CardHeader>
               <CardTitle>Masukkan Kode Unik</CardTitle>
@@ -147,10 +150,12 @@ export default function ReturnPage() {
               </Button>
             </CardContent>
           </Card>
+          </motion.div>
         )}
 
         {/* Step 2: Review & Photo */}
         {step === 2 && lookupResult && (
+          <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
           <Card>
             <CardHeader>
               <CardTitle>Verifikasi Barang</CardTitle>
@@ -203,7 +208,9 @@ export default function ReturnPage() {
               </div>
             </CardContent>
           </Card>
+          </motion.div>
         )}
+        </AnimatePresence>
       </div>
     </div>
   );
