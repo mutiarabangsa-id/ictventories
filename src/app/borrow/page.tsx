@@ -97,7 +97,7 @@ export default function BorrowPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-[url('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center">
+      <div className="min-h-screen flex items-center justify-center p-4" style={{ background: "linear-gradient(135deg, #1E3A5F 0%, #2563EB 50%, #059669 100%)" }}>
         <div className="backdrop-blur-xl bg-white/70 border border-white/40 rounded-2xl p-8 w-full max-w-md text-center shadow-2xl">
           <CheckCircle2 className="mx-auto h-12 w-12 text-emerald-600 mb-4" />
           <h2 className="text-xl font-bold">Peminjaman Diajukan</h2>
@@ -113,7 +113,7 @@ export default function BorrowPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[url('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center bg-fixed">
+    <div className="min-h-screen" style={{ background: "linear-gradient(135deg, #1E3A5F 0%, #2563EB 40%, #059669 100%)" }}>
       <div className="max-w-5xl mx-auto px-4 py-8 md:px-6">
         {/* Header */}
         <div className="mb-8">
