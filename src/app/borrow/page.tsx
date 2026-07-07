@@ -122,40 +122,42 @@ export default function BorrowPage() {
     <div className="min-h-screen bg-[#FAFBFC]">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="border-b-2 border-[#E2E8F0] bg-white px-6 py-4 flex items-center justify-between">
+        <div className="border-b-2 border-[#E2E8F0] bg-white px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-[#0F172A] rounded-lg flex items-center justify-center text-white font-bold text-sm">MB</div>
-            <span className="font-bold text-[#0F172A]">ICT Inventory</span>
+            <span className="font-bold text-[#0F172A] hidden sm:inline">ICT Inventory</span>
           </div>
-          <div className="flex items-center gap-2 text-[12px]">
-            <span className="font-semibold text-[#0F172A] bg-[#DBEAFE] text-[#1E40AF] px-3 py-1 rounded-md">1 Pilih Barang</span>
-            <ChevronRight className="h-3 w-3 text-[#CBD5E1]" />
-            <span className="text-[#94A3B8]">2 Data Diri</span>
-            <ChevronRight className="h-3 w-3 text-[#CBD5E1]" />
-            <span className="text-[#94A3B8]">3 Foto</span>
+          <div className="flex items-center gap-1.5 text-[11px] md:text-[12px]">
+            <span className="font-semibold text-[#0F172A] bg-[#DBEAFE] text-[#1E40AF] px-2 md:px-3 py-1 rounded-md whitespace-nowrap">1 Pilih</span>
+            <ChevronRight className="h-3 w-3 text-[#CBD5E1] flex-shrink-0" />
+            <span className="text-[#94A3B8] whitespace-nowrap">2 Data</span>
+            <ChevronRight className="h-3 w-3 text-[#CBD5E1] flex-shrink-0" />
+            <span className="text-[#94A3B8] whitespace-nowrap">3 Foto</span>
           </div>
         </div>
 
         {/* Toolbar */}
-        <div className="border-b border-[#E2E8F0] bg-white px-6 py-3 flex items-center gap-3">
-          <span className="font-bold text-[13px] text-[#0F172A]">Barang</span>
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#94A3B8]" />
-            <input
-              className="w-full h-8 pl-9 pr-3 text-[13px] border-2 border-[#E2E8F0] rounded-lg focus:border-[#2563EB] outline-none"
-              placeholder="Cari barang atau brand..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
+        <div className="border-b border-[#E2E8F0] bg-white px-4 md:px-6 py-3">
+          <div className="flex items-center gap-3 mb-3 md:mb-0">
+            <span className="font-bold text-[13px] text-[#0F172A] hidden sm:inline">Barang</span>
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#94A3B8]" />
+              <input
+                className="w-full h-9 pl-9 pr-3 text-[13px] border-2 border-[#E2E8F0] rounded-lg focus:border-[#2563EB] outline-none"
+                placeholder="Cari barang atau brand..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
           </div>
-          <div className="flex gap-1">
+          <div className="flex gap-1.5 overflow-x-auto pb-0.5 md:pb-0 md:ml-[calc(52px)]">
             {CATEGORIES.map((c) => {
               const key = "key" in c ? c.key : "value" in c ? (c as any).value : "all";
               return (
                 <button
                   key={key}
                   onClick={() => setCategory(key)}
-                  className={`px-3 py-1.5 rounded-md text-[12px] font-semibold border-2 transition-colors ${
+                  className={`px-3 py-1.5 rounded-md text-[12px] font-semibold border-2 transition-colors whitespace-nowrap flex-shrink-0 ${
                     category === key
                       ? "bg-[#0F172A] text-white border-[#0F172A]"
                       : "bg-white text-[#64748B] border-[#E2E8F0] hover:border-[#CBD5E1] hover:bg-[#F8FAFC]"
@@ -247,7 +249,7 @@ export default function BorrowPage() {
                   <Label className="text-[11px] font-semibold text-[#64748B] uppercase tracking-wider mb-1.5 block">Nama Lengkap</Label>
                   <Input className="h-9 text-[13px] border-2 border-[#E2E8F0] focus:border-[#2563EB]" placeholder="Masukkan nama" value={borrowerName} onChange={(e) => setBorrowerName(e.target.value)} />
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <Label className="text-[11px] font-semibold text-[#64748B] uppercase tracking-wider mb-1.5 block">Email</Label>
                     <Input className="h-9 text-[13px] border-2 border-[#E2E8F0] focus:border-[#2563EB]" type="email" placeholder="email@sekolah.sch.id" value={borrowerEmail} onChange={(e) => setBorrowerEmail(e.target.value)} />
@@ -261,7 +263,7 @@ export default function BorrowPage() {
                   <Label className="text-[11px] font-semibold text-[#64748B] uppercase tracking-wider mb-1.5 block">Jumlah</Label>
                   <Input className="h-9 text-[13px] border-2 border-[#E2E8F0] focus:border-[#2563EB]" type="number" min={1} max={selectedItem.availableQty} value={quantity} onChange={(e) => setQuantity(parseInt(e.target.value) || 1)} />
                 </div>
-                <div className="flex gap-2 pt-2">
+                <div className="flex flex-col sm:flex-row gap-2 pt-2">
                   <Button variant="outline" onClick={() => setPanelOpen(false)} className="bg-[#F1F5F9] border-2 border-[#E2E8F0] hover:bg-[#E2E8F0] text-[#475569] rounded-lg font-semibold h-9 px-4 text-[13px]">
                     Batal
                   </Button>
@@ -312,7 +314,7 @@ export default function BorrowPage() {
                 <p className="text-[11px] text-[#94A3B8] mt-1">Kamera akan terbuka otomatis</p>
               </button>
             )}
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <Button variant="outline" onClick={() => setStep(1)} className="bg-[#F1F5F9] border-2 border-[#E2E8F0] hover:bg-[#E2E8F0] text-[#475569] rounded-lg font-semibold h-9 px-4 text-[13px]">
                 Kembali
               </Button>

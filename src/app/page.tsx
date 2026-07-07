@@ -47,60 +47,60 @@ export default function PublicDashboard() {
   return (
     <div className="min-h-screen bg-[#FAFBFC] font-sans">
       {/* Top Banner Header */}
-      <div className="bg-[#0F172A] text-white px-6 py-8 md:py-12 border-b-2 border-slate-900">
+      <div className="bg-[#0F172A] text-white px-4 md:px-6 py-6 md:py-12 border-b-2 border-slate-900">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-extrabold tracking-tight">MUTIARA BANGSA ICT</h1>
-            <p className="text-slate-300 mt-2 text-sm md:text-base">Sistem Inventaris, Permintaan, & Peminjaman Barang</p>
+            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">MUTIARA BANGSA ICT</h1>
+            <p className="text-slate-300 mt-1 md:text-base text-xs">Sistem Inventaris, Permintaan, & Peminjaman Barang</p>
           </div>
-          <div className="hidden md:flex w-16 h-16 bg-slate-800 rounded-xl items-center justify-center border border-slate-700 text-white font-extrabold text-2xl">
+          <div className="hidden sm:flex w-12 h-12 md:w-16 md:h-16 bg-slate-800 rounded-xl items-center justify-center border border-slate-700 text-white font-extrabold text-lg md:text-2xl">
             ICT
           </div>
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 py-8 md:px-6 space-y-8">
+      <div className="max-w-4xl mx-auto px-4 py-6 md:py-8 md:px-6 space-y-6 md:space-y-8">
         {/* Quick Actions (Card Besar Pinjam & Kembali) */}
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-3 sm:gap-4 sm:grid-cols-2">
           <Link href="/borrow" className="block group">
-            <div className="bg-white border-2 border-[#1E293B] rounded-2xl p-6 hover:bg-[#F8FAFC] transition-all duration-200 shadow-sm hover:shadow-md flex items-center gap-4">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-700 group-hover:bg-blue-200 transition-colors">
-                <ClipboardList className="h-6 w-6" />
+            <div className="bg-white border-2 border-[#1E293B] rounded-2xl p-5 md:p-6 hover:bg-[#F8FAFC] transition-all duration-200 shadow-sm hover:shadow-md flex items-center gap-4">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-700 group-hover:bg-blue-200 transition-colors flex-shrink-0">
+                <ClipboardList className="h-5 w-5 md:h-6 md:w-6" />
               </div>
-              <div>
-                <h3 className="font-bold text-lg text-[#0F172A] group-hover:text-blue-700 transition-colors">Pinjam Barang</h3>
-                <p className="text-xs text-slate-500 mt-1">Pilih barang ICT dari daftar & isi data diri</p>
+              <div className="min-w-0">
+                <h3 className="font-bold text-base md:text-lg text-[#0F172A] group-hover:text-blue-700 transition-colors">Pinjam Barang</h3>
+                <p className="text-[11px] md:text-xs text-slate-500 mt-0.5 md:mt-1 truncate">Pilih barang ICT dari daftar & isi data diri</p>
               </div>
             </div>
           </Link>
 
           <Link href="/return" className="block group">
-            <div className="bg-white border-2 border-[#1E293B] rounded-2xl p-6 hover:bg-[#F8FAFC] transition-all duration-200 shadow-sm hover:shadow-md flex items-center gap-4">
-              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-700 group-hover:bg-emerald-200 transition-colors">
-                <RefreshCw className="h-6 w-6" />
+            <div className="bg-white border-2 border-[#1E293B] rounded-2xl p-5 md:p-6 hover:bg-[#F8FAFC] transition-all duration-200 shadow-sm hover:shadow-md flex items-center gap-4">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-700 group-hover:bg-emerald-200 transition-colors flex-shrink-0">
+                <RefreshCw className="h-5 w-5 md:h-6 md:w-6" />
               </div>
-              <div>
-                <h3 className="font-bold text-lg text-[#0F172A] group-hover:text-emerald-700 transition-colors">Kembalikan Barang</h3>
-                <p className="text-xs text-slate-500 mt-1">Gunakan kode unik Anda untuk verifikasi kembali</p>
+              <div className="min-w-0">
+                <h3 className="font-bold text-base md:text-lg text-[#0F172A] group-hover:text-emerald-700 transition-colors">Kembalikan Barang</h3>
+                <p className="text-[11px] md:text-xs text-slate-500 mt-0.5 md:mt-1 truncate">Gunakan kode unik Anda untuk verifikasi kembali</p>
               </div>
             </div>
           </Link>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-2 gap-4">
-          <div className="bg-white border border-slate-200 rounded-xl p-5">
-            <p className="text-xs font-semibold text-[#64748B] uppercase tracking-wider">Total Item</p>
-            <div className="flex items-baseline gap-2 mt-2">
-              <span className="text-3xl font-bold font-mono text-[#0F172A]">{loading ? "-" : stats?.totalItems}</span>
-              <span className="text-xs text-slate-400 font-medium">unit terdaftar</span>
+        <div className="grid grid-cols-2 gap-3 md:gap-4">
+          <div className="bg-white border border-slate-200 rounded-xl p-4 md:p-5">
+            <p className="text-[10px] md:text-xs font-semibold text-[#64748B] uppercase tracking-wider">Total Item</p>
+            <div className="flex items-baseline gap-1.5 md:gap-2 mt-1.5 md:mt-2">
+              <span className="text-2xl md:text-3xl font-bold font-mono text-[#0F172A]">{loading ? "-" : stats?.totalItems}</span>
+              <span className="text-[10px] md:text-xs text-slate-400 font-medium hidden sm:inline">unit terdaftar</span>
             </div>
           </div>
-          <div className="bg-white border border-slate-200 rounded-xl p-5">
-            <p className="text-xs font-semibold text-[#64748B] uppercase tracking-wider">Sedang Dipinjam</p>
-            <div className="flex items-baseline gap-2 mt-2">
-              <span className="text-3xl font-bold font-mono text-blue-600">{loading ? "-" : stats?.onLoan}</span>
-              <span className="text-xs text-slate-400 font-medium">unit aktif</span>
+          <div className="bg-white border border-slate-200 rounded-xl p-4 md:p-5">
+            <p className="text-[10px] md:text-xs font-semibold text-[#64748B] uppercase tracking-wider">Sedang Dipinjam</p>
+            <div className="flex items-baseline gap-1.5 md:gap-2 mt-1.5 md:mt-2">
+              <span className="text-2xl md:text-3xl font-bold font-mono text-blue-600">{loading ? "-" : stats?.onLoan}</span>
+              <span className="text-[10px] md:text-xs text-slate-400 font-medium hidden sm:inline">unit aktif</span>
             </div>
           </div>
         </div>

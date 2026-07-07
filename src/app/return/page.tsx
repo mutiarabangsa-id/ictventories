@@ -178,11 +178,11 @@ export default function ReturnPage() {
                     </button>
                   )}
 
-                  <div className="flex gap-2 pt-2">
-                    <Button variant="outline" onClick={() => { setStep(1); setLookupResult(null); setError(""); }} className="flex-1 bg-[#F1F5F9] border-2 border-[#E2E8F0] hover:bg-[#E2E8F0] text-[#475569] rounded-lg font-semibold h-9 px-4 text-[13px]">
+                  <div className="flex flex-col sm:flex-row gap-2 pt-2">
+                    <Button variant="outline" onClick={() => { setStep(1); setLookupResult(null); setError(""); }} className="bg-[#F1F5F9] border-2 border-[#E2E8F0] hover:bg-[#E2E8F0] text-[#475569] rounded-lg font-semibold h-9 px-4 text-[13px]">
                       <ChevronLeft className="h-4 w-4 mr-1" /> Kembali
                     </Button>
-                    <Button onClick={handleSubmitReturn} disabled={!imagePreview || submitting} className="flex-1 bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-lg font-semibold h-9 px-4 text-[13px]">
+                    <Button onClick={handleSubmitReturn} disabled={!imagePreview || submitting} className="bg-[#0F172A] hover:bg-[#1E293B] text-white rounded-lg font-semibold h-9 px-4 text-[13px]">
                       {submitting ? "Mengirim..." : "Kirim Pengembalian"}
                     </Button>
                   </div>
