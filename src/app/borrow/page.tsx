@@ -14,6 +14,7 @@ interface Item {
   brand: string;
   quantity: number;
   availableQty: number;
+  imageUrl: string | null;
 }
 
 const BORROWER_TYPES = [
@@ -149,17 +150,18 @@ export default function BorrowPage() {
                       <button
                         key={item.id}
                         onClick={() => { setSelectedItem(item); setStep(2); }}
-                        className={`p-4 rounded-xl border-2 text-left transition-all ${selectedItem?.id === item.id ? "border-blue-500 bg-blue-50" : "border-gray-200 hover:border-blue-300 hover:bg-gray-50"}`}
+                        className={`flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-all ${selectedItem?.id === item.id ? "border-blue-500 bg-blue-50" : "border-gray-200 hover:border-blue-300 hover:bg-gray-50"}`}
                       >
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <p className="font-medium text-gray-900">{item.name}</p>
-                            <p className="text-sm text-gray-500">{item.brand} • {item.category}</p>
-                          </div>
-                          <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
-                            {item.availableQty} tersedia
-                          </span>
+                        {item.imageUrl && (
+                          <img src={item.imageUrl} alt={item.name} className="w-16 h-16 rounded-lg object-cover flex-shrink-0" />
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-gray-900 truncate">{item.name}</p>
+                          <p className="text-sm text-gray-500">{item.brand} • {item.category}</p>
                         </div>
+                        <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full whitespace-nowrap">
+                          {item.availableQty} tersedia
+                        </span>
                       </button>
                     ))}
                   </div>
