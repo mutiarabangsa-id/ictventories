@@ -49,9 +49,9 @@ export async function POST(
 
     await sendEmail({
       to: borrowing.borrowerEmail,
-      subject: "Peminjaman Barang Disetujui",
-      text: `Halo ${borrowing.borrowerName}, peminjaman ${item?.name} sebanyak ${borrowing.quantity} unit telah disetujui. Kode unik pengembalian Anda: ${uniqueCode}`,
-      html: `<p>Halo <strong>${borrowing.borrowerName}</strong>,</p><p>Peminjaman <strong>${item?.name}</strong> sebanyak <strong>${borrowing.quantity}</strong> unit telah disetujui.</p><p>Kode unik pengembalian Anda:</p><h2 style="font-family:monospace;color:#2563eb;letter-spacing:2px;">${uniqueCode}</h2><p>Gunakan kode ini untuk mengembalikan barang di sistem.</p>`,
+      subject: "Borrowing Approved",
+      text: `Hello ${borrowing.borrowerName}, your borrowing of ${item?.name} for ${borrowing.quantity} unit(s) has been approved. Your return unique code: ${uniqueCode}`,
+      html: `<p>Hello <strong>${borrowing.borrowerName}</strong>,</p><p>Your borrowing of <strong>${item?.name}</strong> for <strong>${borrowing.quantity}</strong> unit(s) has been approved.</p><p>Your return unique code:</p><h2 style="font-family:monospace;color:#2563eb;letter-spacing:2px;">${uniqueCode}</h2><p>Use this code to return the item in the system.</p>`,
     });
 
     return NextResponse.json({ success: true, uniqueCode });
@@ -76,9 +76,9 @@ export async function POST(
 
     await sendEmail({
       to: borrowing.borrowerEmail,
-      subject: "Pengembalian Barang Diterima",
-      text: `Halo ${borrowing.borrowerName}, pengembalian ${item?.name} sebanyak ${borrowing.quantity} unit telah sukses diverifikasi.`,
-      html: `<p>Halo <strong>${borrowing.borrowerName}</strong>,</p><p>Pengembalian <strong>${item?.name}</strong> sebanyak <strong>${borrowing.quantity}</strong> unit telah sukses diverifikasi. Terima kasih.</p>`,
+      subject: "Return Accepted",
+      text: `Hello ${borrowing.borrowerName}, your return of ${item?.name} for ${borrowing.quantity} unit(s) has been successfully verified.`,
+      html: `<p>Hello <strong>${borrowing.borrowerName}</strong>,</p><p>Your return of <strong>${item?.name}</strong> for <strong>${borrowing.quantity}</strong> unit(s) has been successfully verified. Thank you.</p>`,
     });
 
     return NextResponse.json({ success: true });
@@ -92,9 +92,9 @@ export async function POST(
 
     await sendEmail({
       to: borrowing.borrowerEmail,
-      subject: "Peminjaman Barang Ditolak",
-      text: `Halo ${borrowing.borrowerName}, pengajuan peminjaman ${item?.name} ditolak oleh admin.`,
-      html: `<p>Halo <strong>${borrowing.borrowerName}</strong>,</p><p>Pengajuan peminjaman <strong>${item?.name}</strong> Anda ditolak oleh admin. Silakan hubungi tim ICT jika ada pertanyaan.</p>`,
+      subject: "Borrowing Rejected",
+      text: `Hello ${borrowing.borrowerName}, your borrowing request for ${item?.name} has been rejected by admin.`,
+      html: `<p>Hello <strong>${borrowing.borrowerName}</strong>,</p><p>Your borrowing request for <strong>${item?.name}</strong> has been rejected by admin. Please contact the ICT team if you have questions.</p>`,
     });
 
     return NextResponse.json({ success: true });

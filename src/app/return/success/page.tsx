@@ -6,9 +6,9 @@ export default function ReturnSuccessPage() {
       <Card className="w-full max-w-md text-center">
         <CardHeader>
           <div className="text-5xl mb-4">🎉</div>
-          <CardTitle className="text-xl text-emerald-700">Pengembalian Diajukan!</CardTitle>
+          <CardTitle className="text-xl text-emerald-700">Return Submitted!</CardTitle>
           <CardDescription className="mt-2">
-            Admin akan memverifikasi pengembalian Anda.
+            Admin will verify your return.
           </CardDescription>
         </CardHeader>
       </Card>

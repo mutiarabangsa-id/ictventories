@@ -51,20 +51,20 @@ export default function SettingsPage() {
   };
 
   const handleDeleteUser = async (id: string) => {
-    if (!confirm("Hapus admin ini?")) return;
+    if (!confirm("Delete this admin?")) return;
     await fetch(`/api/admin/users?id=${id}`, { method: "DELETE" });
     fetchUsers();
   };
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-900">Settings</h2>
+      <h2 className="text-2xl font-bold text-[#0a0b0d]">Settings</h2>
 
       {/* QR Code Card */}
       <Card>
         <CardHeader>
-          <CardTitle>📱 QR Code</CardTitle>
-          <CardDescription>Scan untuk akses halaman peminjaman barang</CardDescription>
+          <CardTitle>QR Code</CardTitle>
+          <CardDescription>Scan to access the borrowing page</CardDescription>
         </CardHeader>
         <CardContent className="text-center">
           <div className="inline-block bg-white p-4 rounded-xl border mb-4">
@@ -74,8 +74,8 @@ export default function SettingsPage() {
               className="w-48 h-48 mx-auto"
             />
           </div>
-          <p className="text-sm text-gray-500 mb-3">
-            URL: <span className="font-mono text-blue-600">{qrUrl}</span>
+          <p className="text-sm text-[#5b616e] mb-3">
+            URL: <span className="font-mono text-[#0052ff]">{qrUrl}</span>
           </p>
         </CardContent>
       </Card>
@@ -85,16 +85,16 @@ export default function SettingsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
-              <CardTitle>👥 Admin Users</CardTitle>
-              <CardDescription>Kelola akun admin</CardDescription>
+              <CardTitle>Admin Users</CardTitle>
+              <CardDescription>Manage admin accounts</CardDescription>
             </div>
             <Button size="sm" onClick={() => setShowAddUser(!showAddUser)}>
-              {showAddUser ? "Batal" : "Tambah Admin"}
+              {showAddUser ? "Cancel" : "Add Admin"}
             </Button>
           </CardHeader>
           <CardContent className="space-y-3">
             {showAddUser && (
-              <div className="bg-blue-50 rounded-xl p-4 space-y-3 mb-4">
+              <div className="bg-[#f7f7f7] rounded-[24px] p-4 space-y-3 mb-4">
                 <div className="grid gap-3 md:grid-cols-2">
                   <div className="space-y-1">
                     <Label>Username</Label>
@@ -111,7 +111,7 @@ export default function SettingsPage() {
                   <div className="space-y-1">
                     <Label>Role</Label>
                     <select
-                      className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm"
+                      className="flex h-12 w-full rounded-[12px] border border-[#dee1e6] bg-white px-4 py-3.5 text-base text-[#0a0b0d] focus:outline-none focus:border-[#0052ff] focus:border-2 transition-colors"
                       value={newRole}
                       onChange={(e) => setNewRole(e.target.value)}
                     >
@@ -121,19 +121,19 @@ export default function SettingsPage() {
                   </div>
                 </div>
                 <Button size="sm" onClick={handleCreateUser} disabled={!newUsername || !newPassword}>
-                  Simpan
+                  Save
                 </Button>
               </div>
             )}
 
             {users.map((u) => (
-              <div key={u.id} className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
+              <div key={u.id} className="flex items-center justify-between bg-[#f7f7f7] rounded-[12px] p-3">
                 <div>
-                  <p className="font-medium text-sm">{u.username}</p>
-                  <p className="text-xs text-gray-500">{u.email} • {u.role}</p>
+                  <p className="font-medium text-sm text-[#0a0b0d]">{u.username}</p>
+                  <p className="text-xs text-[#7c828a]">{u.email} • {u.role}</p>
                 </div>
                 {u.role !== "super_admin" && (
-                  <Button variant="outline" size="sm" className="text-red-600" onClick={() => handleDeleteUser(u.id)}>Hapus</Button>
+                  <Button variant="destructive" size="sm" onClick={() => handleDeleteUser(u.id)}>Delete</Button>
                 )}
               </div>
             ))}

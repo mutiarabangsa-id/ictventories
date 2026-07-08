@@ -5,7 +5,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "MBS ICT Inventory",
-  description: "Sistem Inventaris, Permintaan & Peminjaman Barang ICT - Mutiara Bangsa",
+  description: "ICT Inventory, Request & Borrowing System - Mutiara Bangsa",
 };
 
 export default function RootLayout({
@@ -14,11 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="id"
-      className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
-    >
-      <body className="min-h-screen bg-background text-foreground font-sans">
+    <html lang="id" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className="min-h-screen bg-white text-[#0a0b0d] font-sans antialiased">
         {children}
       </body>
     </html>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 interface RequestData {
   id: string;
@@ -50,7 +51,7 @@ export default function RequestDetailPage() {
       <!DOCTYPE html>
       <html>
       <head>
-        <title>Permintaan Barang - ${req?.requestNumber}</title>
+        <title>Goods Request - ${req?.requestNumber}</title>
         <style>
           @page { size: A4 landscape; margin: 20mm; }
           body { font-family: Arial, sans-serif; color: #000; }
@@ -72,7 +73,7 @@ export default function RequestDetailPage() {
       <body>
         <div class="header">
           <h1>MUTIARA BANGSA ICT</h1>
-          <h2>SURAT PERMINTAAN BARANG</h2>
+          <h2>GOODS REQUEST LETTER</h2>
         </div>
         <div class="info">
           <p><strong>No:</strong> ${req?.requestNumber || ""}</p>
@@ -85,9 +86,9 @@ export default function RequestDetailPage() {
               <th>#</th>
               <th>Item</th>
               <th>Qty</th>
-              <th>Harga Est.</th>
+              <th>Est. Price</th>
               <th>Subtotal</th>
-              <th>Keterangan</th>
+              <th>Description</th>
             </tr>
           </thead>
           <tbody>
@@ -103,13 +104,13 @@ export default function RequestDetailPage() {
             `).join("")}
           </tbody>
         </table>
-        <div class="total">Total Estimasi: Rp ${total.toLocaleString("id-ID")}</div>
+        <div class="total">Total Estimate: Rp ${total.toLocaleString("id-ID")}</div>
         <div class="signatures">
           <div class="signature">
-            <div class="line">Dibuat oleh<br/>(Admin ICT)</div>
+            <div class="line">Prepared by<br/>(ICT Admin)</div>
           </div>
           <div class="signature">
-            <div class="line">Disetujui oleh<br/>(Kepala Sekolah)</div>
+            <div class="line">Approved by<br/>(Principal)</div>
           </div>
         </div>
       </body>
@@ -119,32 +120,32 @@ export default function RequestDetailPage() {
     printWindow.print();
   };
 
-  if (!req) return <div className="p-6 text-gray-400">Memuat data...</div>;
+  if (!req) return <div className="p-6 text-[#7c828a]">Loading...</div>;
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-900">Detail Request</h2>
-        <Button onClick={handlePrint}>🖨️ Cetak Surat</Button>
+        <h2 className="text-2xl font-bold text-[#0a0b0d]">Detail Request</h2>
+        <Button onClick={handlePrint}>Print Letter</Button>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Informasi Request</CardTitle>
+          <CardTitle className="text-base">Request Information</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-3 md:grid-cols-3 text-sm">
             <div>
-              <span className="text-gray-500">No. Request</span>
-              <p className="font-mono font-medium">{req.requestNumber}</p>
+              <span className="text-[#5b616e]">No. Request</span>
+              <p className="font-mono font-medium text-[#0a0b0d]">{req.requestNumber}</p>
             </div>
             <div>
-              <span className="text-gray-500">Supplier</span>
-              <p className="font-medium">{req.supplierName}</p>
+              <span className="text-[#5b616e]">Supplier</span>
+              <p className="font-medium text-[#0a0b0d]">{req.supplierName}</p>
             </div>
             <div>
-              <span className="text-gray-500">Status</span>
-              <p><span className={`text-xs px-2 py-1 rounded-full font-medium ${req.status === "submitted" ? "bg-emerald-100 text-emerald-700" : "bg-gray-100 text-gray-600"}`}>{req.status}</span></p>
+              <span className="text-[#5b616e]">Status</span>
+              <p><Badge variant={req.status === "submitted" ? "success" : "secondary"}>{req.status}</Badge></p>
             </div>
           </div>
         </CardContent>
@@ -152,37 +153,37 @@ export default function RequestDetailPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Daftar Barang</CardTitle>
+          <CardTitle className="text-base">Item List</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 border-b">
+              <thead className="bg-[#f7f7f7] border-b border-[#dee1e6]">
                 <tr>
-                  <th className="text-left p-3 font-medium text-gray-600">#</th>
-                  <th className="text-left p-3 font-medium text-gray-600">Nama</th>
-                  <th className="text-center p-3 font-medium text-gray-600">Qty</th>
-                  <th className="text-right p-3 font-medium text-gray-600">Harga Est.</th>
-                  <th className="text-right p-3 font-medium text-gray-600">Subtotal</th>
-                  <th className="text-left p-3 font-medium text-gray-600">Keterangan</th>
+                  <th className="text-left p-3 font-medium text-[#5b616e]">#</th>
+                  <th className="text-left p-3 font-medium text-[#5b616e]">Name</th>
+                  <th className="text-center p-3 font-medium text-[#5b616e]">Qty</th>
+                  <th className="text-right p-3 font-medium text-[#5b616e]">Est. Price</th>
+                  <th className="text-right p-3 font-medium text-[#5b616e]">Subtotal</th>
+                  <th className="text-left p-3 font-medium text-[#5b616e]">Description</th>
                 </tr>
               </thead>
-              <tbody className="divide-y">
+              <tbody className="divide-y divide-[#dee1e6]">
                 {itemsList.map((item, i) => (
                   <tr key={i}>
-                    <td className="p-3">{i + 1}</td>
-                    <td className="p-3 font-medium">{item.name}</td>
-                    <td className="p-3 text-center">{item.qty}</td>
-                    <td className="p-3 text-right">Rp {item.est_price.toLocaleString("id-ID")}</td>
-                    <td className="p-3 text-right font-medium">Rp {(item.est_price * item.qty).toLocaleString("id-ID")}</td>
-                    <td className="p-3 text-gray-500">{item.desc || "-"}</td>
+                    <td className="p-3 text-[#0a0b0d]">{i + 1}</td>
+                    <td className="p-3 font-medium text-[#0a0b0d]">{item.name}</td>
+                    <td className="p-3 text-center text-[#0a0b0d]">{item.qty}</td>
+                    <td className="p-3 text-right text-[#0a0b0d]">Rp {item.est_price.toLocaleString("id-ID")}</td>
+                    <td className="p-3 text-right font-medium text-[#0a0b0d]">Rp {(item.est_price * item.qty).toLocaleString("id-ID")}</td>
+                    <td className="p-3 text-[#7c828a]">{item.desc || "-"}</td>
                   </tr>
                 ))}
               </tbody>
-              <tfoot className="border-t-2 bg-gray-50">
+              <tfoot className="border-t-2 border-[#dee1e6] bg-[#f7f7f7]">
                 <tr>
-                  <td colSpan={4} className="p-3 text-right font-bold">Total Estimasi:</td>
-                  <td className="p-3 text-right font-bold text-blue-700">Rp {total.toLocaleString("id-ID")}</td>
+                  <td colSpan={4} className="p-3 text-right font-bold text-[#0a0b0d]">Total Estimate:</td>
+                  <td className="p-3 text-right font-bold text-[#0052ff]">Rp {total.toLocaleString("id-ID")}</td>
                   <td></td>
                 </tr>
               </tfoot>

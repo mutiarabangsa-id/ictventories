@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -60,7 +61,7 @@ export default function InventoryPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Hapus item ini?")) return;
+    if (!confirm("Delete this item?")) return;
     await fetch(`/api/admin/inventory?id=${id}`, { method: "DELETE" });
     fetchItems();
   };
@@ -90,39 +91,39 @@ export default function InventoryPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-900">📦 Inventory</h2>
+        <h2 className="text-xl font-semibold text-[#0a0b0d]">Inventory</h2>
         <div className="flex gap-2">
           <Button variant="outline" size="sm" onClick={() => setShowImport(!showImport)}>Import CSV</Button>
           <Button variant="outline" size="sm" onClick={exportCsv}>Export CSV</Button>
-          <Button size="sm" onClick={() => { setEditItem(null); setForm({ name: "", category: "hardware", brand: "", quantity: "1", location: "ICT Lab" }); setShowModal(true); }}>+ Barang</Button>
+          <Button size="sm" onClick={() => { setEditItem(null); setForm({ name: "", category: "hardware", brand: "", quantity: "1", location: "ICT Lab" }); setShowModal(true); }}>+ Item</Button>
         </div>
       </div>
 
       {/* Search & Filter */}
       <div className="flex gap-3">
-        <Input placeholder="Cari barang..." value={search} onChange={(e) => setSearch(e.target.value)} onKeyDown={(e) => e.key === "Enter" && fetchItems()} className="max-w-xs" />
+        <Input placeholder="Search items..." value={search} onChange={(e) => setSearch(e.target.value)} onKeyDown={(e) => e.key === "Enter" && fetchItems()} className="max-w-xs bg-white" />
         <select
-          className="flex h-9 rounded-md border border-input bg-background px-3 py-1 text-sm max-w-[150px]"
+          className="flex h-9 rounded-[12px] border border-[#dee1e6] bg-white px-3 py-1 text-sm max-w-[150px]"
           value={categoryFilter}
           onChange={(e) => { setCategoryFilter(e.target.value); fetchItems(); }}
         >
-          <option value="">Semua</option>
+          <option value="">All</option>
           {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
         </select>
-        <Button variant="ghost" size="sm" onClick={fetchItems}>Cari</Button>
+        <Button variant="ghost" size="sm" onClick={fetchItems}>Search</Button>
       </div>
 
       {/* Import CSV Section */}
       {showImport && (
-        <Card>
+        <Card className="rounded-[24px] border border-[#dee1e6]">
           <CardHeader>
-            <CardTitle className="text-base">Import CSV</CardTitle>
+            <CardTitle className="text-base text-[#0a0b0d]">Import CSV</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            <p className="text-sm text-gray-500">Format: Name,Category,Brand,Quantity,Location (header baris pertama otomatis diabaikan)</p>
+            <p className="text-sm text-[#7c828a]">Format: Name,Category,Brand,Quantity,Location (first row header is auto-ignored)</p>
             <textarea
-              className="flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm min-h-[150px]"
-              placeholder="Name,Category,Brand,Quantity,Location&#10;Tinta Epson L,consumable,Epson,5,ICT Lab&#10;Mouse Wireless,hardware,Logitech,10,ICT Lab"
+              className="flex w-full rounded-[12px] border border-[#dee1e6] bg-white px-3 py-2 text-sm min-h-[150px] text-[#0a0b0d] placeholder:text-[#7c828a]"
+              placeholder="Name,Category,Brand,Quantity,Location&#10;Epson Ink,consumable,Epson,5,ICT Lab&#10;Wireless Mouse,hardware,Logitech,10,ICT Lab"
               value={csvText}
               onChange={(e) => setCsvText(e.target.value)}
             />
@@ -132,42 +133,42 @@ export default function InventoryPage() {
       )}
 
       {/* Inventory Table */}
-      <Card>
+      <Card className="rounded-[24px] border border-[#dee1e6]">
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 border-b">
+              <thead className="bg-[#f7f7f7] border-b border-[#dee1e6]">
                 <tr>
-                  <th className="text-left p-3 font-medium text-gray-600">Nama</th>
-                  <th className="text-left p-3 font-medium text-gray-600">Kategori</th>
-                  <th className="text-left p-3 font-medium text-gray-600">Brand</th>
-                  <th className="text-center p-3 font-medium text-gray-600">Stok</th>
-                  <th className="text-center p-3 font-medium text-gray-600">Tersedia</th>
-                  <th className="text-center p-3 font-medium text-gray-600">Actions</th>
+                  <th className="text-left p-3 font-medium text-[#5b616e]">Name</th>
+                  <th className="text-left p-3 font-medium text-[#5b616e]">Category</th>
+                  <th className="text-left p-3 font-medium text-[#5b616e]">Brand</th>
+                  <th className="text-center p-3 font-medium text-[#5b616e]">Stock</th>
+                  <th className="text-center p-3 font-medium text-[#5b616e]">Available</th>
+                  <th className="text-center p-3 font-medium text-[#5b616e]">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y">
+              <tbody className="divide-y divide-[#dee1e6]">
                 {items.map((item) => (
-                  <tr key={item.id} className="hover:bg-gray-50">
-                    <td className="p-3 font-medium">{item.name}</td>
+                  <tr key={item.id} className="hover:bg-[#f7f7f7]">
+                    <td className="p-3 font-medium text-[#0a0b0d]">{item.name}</td>
                     <td className="p-3">
-                      <span className={`text-xs px-2 py-1 rounded-full ${item.category === "hardware" ? "bg-blue-100 text-blue-700" : item.category === "consumable" ? "bg-amber-100 text-amber-700" : "bg-emerald-100 text-emerald-700"}`}>
+                      <Badge variant={item.category === "hardware" ? "default" : item.category === "consumable" ? "warning" : "success"}>
                         {item.category}
-                      </span>
+                      </Badge>
                     </td>
-                    <td className="p-3 text-gray-600">{item.brand}</td>
-                    <td className="p-3 text-center">{item.quantity}</td>
+                    <td className="p-3 text-[#5b616e]">{item.brand}</td>
+                    <td className="p-3 text-center text-[#0a0b0d]">{item.quantity}</td>
                     <td className="p-3 text-center">
-                      <span className={item.availableQty > 0 ? "text-emerald-600 font-medium" : "text-red-600 font-medium"}>{item.availableQty}</span>
+                      <span className={item.availableQty > 0 ? "text-[#05b169] font-medium" : "text-[#cf202f] font-medium"}>{item.availableQty}</span>
                     </td>
                     <td className="p-3 text-center space-x-2">
                       <Button variant="ghost" size="sm" onClick={() => { setEditItem(item); setForm({ name: item.name, category: item.category, brand: item.brand, quantity: String(item.quantity), location: item.location }); setShowModal(true); }}>Edit</Button>
-                      <Button variant="ghost" size="sm" className="text-red-600" onClick={() => handleDelete(item.id)}>Hapus</Button>
+                       <Button variant="ghost" size="sm" className="text-[#cf202f]" onClick={() => handleDelete(item.id)}>Delete</Button>
                     </td>
                   </tr>
                 ))}
                 {items.length === 0 && (
-                  <tr><td colSpan={6} className="text-center p-6 text-gray-400">Belum ada barang</td></tr>
+                   <tr><td colSpan={6} className="text-center p-6 text-[#7c828a]">No items yet</td></tr>
                 )}
               </tbody>
             </table>
@@ -178,38 +179,38 @@ export default function InventoryPage() {
       {/* Add/Edit Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowModal(false)}>
-          <div className="bg-white rounded-xl p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-lg font-bold mb-4">{editItem ? "Edit Barang" : "Tambah Barang"}</h3>
+          <div className="bg-white rounded-[24px] p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-lg font-bold text-[#0a0b0d] mb-4">{editItem ? "Edit Item" : "Add Item"}</h3>
             <div className="space-y-3">
               <div className="space-y-1">
-                <Label>Nama</Label>
-                <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+                <Label className="text-[#5b616e]">Name</Label>
+                <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="rounded-[12px] bg-white" />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <Label>Kategori</Label>
-                  <select className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}>
+                  <Label className="text-[#5b616e]">Category</Label>
+                  <select className="flex h-9 w-full rounded-[12px] border border-[#dee1e6] bg-white px-3 py-1 text-sm text-[#0a0b0d]" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}>
                     {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
                 <div className="space-y-1">
-                  <Label>Brand</Label>
-                  <Input value={form.brand} onChange={(e) => setForm({ ...form, brand: e.target.value })} />
+                  <Label className="text-[#5b616e]">Brand</Label>
+                  <Input value={form.brand} onChange={(e) => setForm({ ...form, brand: e.target.value })} className="rounded-[12px] bg-white" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <Label>Jumlah</Label>
-                  <Input type="number" min={1} value={form.quantity} onChange={(e) => setForm({ ...form, quantity: e.target.value })} />
+                  <Label className="text-[#5b616e]">Quantity</Label>
+                  <Input type="number" min={1} value={form.quantity} onChange={(e) => setForm({ ...form, quantity: e.target.value })} className="rounded-[12px] bg-white" />
                 </div>
                 <div className="space-y-1">
-                  <Label>Lokasi</Label>
-                  <Input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} />
+                  <Label className="text-[#5b616e]">Location</Label>
+                  <Input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} className="rounded-[12px] bg-white" />
                 </div>
               </div>
               <div className="flex gap-2 pt-2">
-                <Button variant="outline" className="flex-1" onClick={() => setShowModal(false)}>Batal</Button>
-                <Button className="flex-1" onClick={handleSave} disabled={!form.name || !form.brand}>Simpan</Button>
+                <Button variant="outline" className="flex-1" onClick={() => setShowModal(false)}>Cancel</Button>
+                <Button className="flex-1" onClick={handleSave} disabled={!form.name || !form.brand}>Save</Button>
               </div>
             </div>
           </div>

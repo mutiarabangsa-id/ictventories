@@ -6,9 +6,9 @@ export default function BorrowSuccessPage() {
       <Card className="w-full max-w-md text-center">
         <CardHeader>
           <div className="text-5xl mb-4">✅</div>
-          <CardTitle className="text-xl text-emerald-700">Berhasil!</CardTitle>
+          <CardTitle className="text-xl text-emerald-700">Success!</CardTitle>
           <CardDescription className="mt-2">
-            Pengajuan peminjaman Anda sedang diproses.
+            Your borrowing request is being processed.
           </CardDescription>
         </CardHeader>
       </Card>
